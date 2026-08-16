@@ -4,6 +4,9 @@ CPU Load Manager automatically caps CPU-sensitive World of Warcraft settings
 according to the current content and restores the player's exact normal values
 when the profile no longer applies.
 
+Created by **Mimezu**. Source and releases:
+[github.com/Mimezu/wow-cpu-load-manager](https://github.com/Mimezu/wow-cpu-load-manager)
+
 ## Use
 
 - Open **Options > AddOns > CPU Load Manager** for the master toggle and status.

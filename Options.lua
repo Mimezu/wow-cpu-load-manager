@@ -8,6 +8,14 @@ local title = panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 title:SetPoint("TOPLEFT", 16, -16)
 title:SetText("CPU Load Manager")
 
+local version = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+version:SetPoint("TOPRIGHT", -18, -16)
+version:SetText("v" .. (C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version") or "1.2.1") .. "  •  Retail 12.1")
+
+local creator = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+creator:SetPoint("TOPRIGHT", version, "BOTTOMRIGHT", 0, -4)
+creator:SetText("by Mimezu")
+
 local subtitle = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
 subtitle:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
 subtitle:SetWidth(620)
