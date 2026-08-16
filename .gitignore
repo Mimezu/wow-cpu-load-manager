@@ -1,0 +1,10 @@
+# Packaged releases and local editor files
+*.zip
+.idea/
+.vscode/
+*.code-workspace
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini

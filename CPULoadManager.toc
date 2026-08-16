@@ -1,0 +1,10 @@
+## Interface: 120100
+## Title: CPU Load Manager
+## Notes: Automatically reduces CPU-heavy settings by content and raid size, then restores your normal settings.
+## Author: Codex
+## Version: 1.2.0
+## SavedVariables: CPULoadManagerDB
+
+Core.lua
+Benchmark.lua
+Options.lua
