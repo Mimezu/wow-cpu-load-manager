@@ -4,20 +4,25 @@ local panel = CreateFrame("Frame")
 panel.name = "CPU Load Manager"
 Addon.optionsPanel = panel
 
+local headerIcon = panel:CreateTexture(nil, "ARTWORK")
+headerIcon:SetSize(32, 32)
+headerIcon:SetPoint("TOPLEFT", 16, -10)
+headerIcon:SetTexture("Interface\\AddOns\\CPULoadManager\\Assets\\CPULoadManagerIcon")
+
 local title = panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
-title:SetPoint("TOPLEFT", 16, -16)
+title:SetPoint("LEFT", headerIcon, "RIGHT", 10, 0)
 title:SetText("CPU Load Manager")
 
 local version = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
 version:SetPoint("TOPRIGHT", -18, -16)
-version:SetText("v" .. (C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version") or "1.2.2") .. "  •  Retail 12.1")
+version:SetText("v" .. (C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version") or "1.2.3") .. "  •  Retail 12.1")
 
 local creator = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
 creator:SetPoint("TOPRIGHT", version, "BOTTOMRIGHT", 0, -4)
 creator:SetText("by Mimezu")
 
 local subtitle = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-subtitle:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
+subtitle:SetPoint("TOPLEFT", 16, -50)
 subtitle:SetWidth(620)
 subtitle:SetJustifyH("LEFT")
 subtitle:SetText("Automatically caps CPU-heavy settings for crowded or group content and restores your exact normal values afterward. GPU-only quality settings are not changed.")
