@@ -1,5 +1,7 @@
 # CPU Load Manager
 
+<img src="Assets/CPULoadManagerIcon.png" width="160" alt="CPU Load Manager icon">
+
 CPU Load Manager automatically caps CPU-sensitive World of Warcraft settings
 according to the current content and restores the player's exact normal values
 when the profile no longer applies.

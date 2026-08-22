@@ -10,7 +10,7 @@ title:SetText("CPU Load Manager")
 
 local version = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
 version:SetPoint("TOPRIGHT", -18, -16)
-version:SetText("v" .. (C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version") or "1.2.1") .. "  •  Retail 12.1")
+version:SetText("v" .. (C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version") or "1.2.2") .. "  •  Retail 12.1")
 
 local creator = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
 creator:SetPoint("TOPRIGHT", version, "BOTTOMRIGHT", 0, -4)

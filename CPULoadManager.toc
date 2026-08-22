@@ -2,8 +2,9 @@
 ## Title: CPU Load Manager
 ## Notes: Automatically reduces CPU-heavy settings by content and raid size, then restores your normal settings.
 ## Author: Mimezu
-## Version: 1.2.1
+## Version: 1.2.2
 ## SavedVariables: CPULoadManagerDB
+## IconTexture: Interface\AddOns\CPULoadManager\Assets\CPULoadManagerIcon
 
 Core.lua
 Benchmark.lua
