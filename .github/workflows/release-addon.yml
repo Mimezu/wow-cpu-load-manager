@@ -40,17 +40,55 @@ jobs:
         shell: bash
         run: |
           STAGE="$(mktemp -d)"
-          mkdir -p "$STAGE/CPULoadManager"
-          rsync -a \
-            --exclude=".git" \
-            --exclude=".github" \
-            --exclude="*.zip" \
-            --exclude=".DS_Store" \
-            ./ "$STAGE/CPULoadManager/"
+          ADDON_ROOT="$STAGE/CPULoadManager"
+          RUNTIME_FILES=(
+            "CPULoadManager.toc"
+            "Core.lua"
+            "Benchmark.lua"
+            "Options.lua"
+            "Assets/CPULoadManagerIcon.tga"
+          )
+
+          declare -A PACKAGED_FILES=()
+          for file in "${RUNTIME_FILES[@]}"; do
+            if [[ ! -f "$file" ]]; then
+              echo "Required runtime file is missing: $file" >&2
+              exit 1
+            fi
+            PACKAGED_FILES["$file"]=1
+            install -Dm0644 "$file" "$ADDON_ROOT/$file"
+          done
+
+          mapfile -t TOC_FILES < <(
+            sed -e 's/\r$//' -e '/^[[:space:]]*#/d' -e '/^[[:space:]]*$/d' "CPULoadManager.toc"
+          )
+          for file in "${TOC_FILES[@]}"; do
+            if [[ -z "${PACKAGED_FILES[$file]+included}" ]]; then
+              echo "TOC runtime file is not in the package allow-list: $file" >&2
+              exit 1
+            fi
+          done
+
           (
             cd "$STAGE"
-            zip -qr "$GITHUB_WORKSPACE/CPULoadManager.zip" "CPULoadManager"
+            zip -Xqr "$GITHUB_WORKSPACE/CPULoadManager.zip" "CPULoadManager"
           )
+
+          unzip -tq "$GITHUB_WORKSPACE/CPULoadManager.zip"
+          ACTUAL_ENTRIES="$(
+            unzip -Z1 "$GITHUB_WORKSPACE/CPULoadManager.zip" |
+              sed '/\/$/d' |
+              LC_ALL=C sort
+          )"
+          EXPECTED_ENTRIES="$(
+            printf 'CPULoadManager/%s\n' "${RUNTIME_FILES[@]}" |
+              LC_ALL=C sort
+          )"
+          if [[ "$ACTUAL_ENTRIES" != "$EXPECTED_ENTRIES" ]]; then
+            echo "ZIP contents do not match the runtime allow-list." >&2
+            diff -u <(printf '%s\n' "$EXPECTED_ENTRIES") <(printf '%s\n' "$ACTUAL_ENTRIES") || true
+            exit 1
+          fi
 
       - name: Publish GitHub Release
         if: steps.version.outputs.release == 'true'
